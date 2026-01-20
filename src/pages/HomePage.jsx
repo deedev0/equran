@@ -1,9 +1,11 @@
 import React from 'react';
 import SuratCardList from '../components/SuratCardList';
 import { getSurats } from '../utils/api';
+import SearchBar from '../components/SearchBar';
 
 function HomePage() {
   const [surats, setSurats] = React.useState(null);
+  const [searchQuery, setSearchQuery] = React.useState('');
 
   React.useEffect(() => {
     getSurats().then((data) => {
@@ -17,8 +19,25 @@ function HomePage() {
       )
     }
 
+    // Logika Filter: Mencocokkan nama surat dengan query pencarian
+    const filteredSurats = surats.filter((surat) =>
+      surat.namaLatin.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      surat.nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
-      <SuratCardList surats={surats} />
+    <>
+      <SearchBar 
+        searchQuery={searchQuery} 
+        setSearchQuery={setSearchQuery} 
+      />
+
+      {filteredSurats.length > 0 ? (
+        <SuratCardList surats={filteredSurats} />
+      ) : (
+        <p>Surat &quot;{searchQuery}&quot; tidak ditemukan.</p>
+      )}
+    </>
     )
 }
 

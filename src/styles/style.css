@@ -8,3 +8,48 @@ body {
   width: 75px;
   height: 75px;
 }
+.search-container {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px; /* Jarak ikon dari sisi kiri */
+  top: 50%;
+  transform: translateY(-50%); /* Teknik agar benar-benar di tengah vertikal */
+  color: #888;
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* User bisa klik tembus ikon ke input */
+  transition: color 0.3s ease;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px; /* Padding kiri 48px agar teks mulai setelah ikon */
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Membuat sudut lebih melengkung seperti di gambar */
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+/* EFEK FOKUS HIJAU */
+.search-input:focus {
+  border: 2px solid #28a745;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.1); /* Shadow halus */
+}
+
+/* Mengubah warna ikon jadi hijau saat input aktif */
+.search-wrapper:focus-within .search-icon {
+  color: #28a745;
+}
